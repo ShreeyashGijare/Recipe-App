@@ -63,5 +63,8 @@ dependencies {
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
 
+    testImplementation(libs.test.coroutines)
+    testImplementation(libs.mockito)
+
 
 }
