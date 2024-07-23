@@ -101,20 +101,20 @@ class RecipeDetailViewModel @Inject constructor(
             .launchIn(viewModelScope)
 
 
-    fun RecipeDetails.toRecipe(): Recipe {
-        return com.example.search.domain.model.Recipe(
-            idMeal,
-            strArea,
-            strMeal,
-            strMealThumb,
-            strCategory,
-            strTags,
-            strYoutube,
-            strInstructions
-        )
-    }
 
+}
 
+fun RecipeDetails.toRecipe(): Recipe {
+    return com.example.search.domain.model.Recipe(
+        idMeal,
+        strArea,
+        strMeal,
+        strMealThumb,
+        strCategory,
+        strTags,
+        strYoutube,
+        strInstructions
+    )
 }
 
 object RecipeDetail {

@@ -39,6 +39,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -50,6 +51,14 @@ import com.example.common.navigation.NavigationRoutes
 import com.example.common.util.UiText
 import kotlinx.coroutines.flow.collectLatest
 
+
+object RecipeListScreenTestTag {
+
+    const val SEARCH = "SEARCH"
+    const val LAZY_COLUMN = "LAZY_COLUMN"
+    const val FLOATING_ACTION_BTN = "FLOATING_ACTION_BTN"
+
+}
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -87,7 +96,7 @@ fun RecipeListScreen(
         floatingActionButton = {
             FloatingActionButton(onClick = {
                 viewModel.onEvent(RecipeList.Event.FavoriteScreen)
-            }) {
+            }, modifier = Modifier.testTag(RecipeListScreenTestTag.FLOATING_ACTION_BTN)) {
                 Icon(imageVector = Icons.Default.Star, contentDescription = null)
             }
         },
@@ -108,7 +117,9 @@ fun RecipeListScreen(
                     unfocusedContainerColor = Color.Transparent,
                     focusedContainerColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent
-                ), modifier = Modifier.fillMaxWidth()
+                ), modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag(RecipeListScreenTestTag.SEARCH)
             )
         }) {
         if (uiState.value.isLoading) {
@@ -137,6 +148,7 @@ fun RecipeListScreen(
                 modifier = Modifier
                     .padding(it)
                     .fillMaxSize()
+                    .testTag(RecipeListScreenTestTag.LAZY_COLUMN)
             ) {
 
                 items(list) {
